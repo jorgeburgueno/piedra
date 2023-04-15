@@ -1,42 +1,82 @@
 const opcionesDeJuego= ['Piedra', 'Papel', 'Tijera']
+let scoreJugador = 0;
+let scoreMaquina = 0;
+let empatados= 0 ;
+let ganaPiedra = "Ganaste!, Piedra gana a Tijera"
+let ganaTijera = "Ganaste!, Tijera gana a Papel"
+let ganaPapel  = "Ganaste!, Papel gana a Piedra"
+let pierdePiedra = "Perdiste!, Papel gana a Tijera"
+let pierdePapel = "Perdiste!, Tijera gana a Piedra"
+let pierdeTijera = "Perdiste!, Piedra gana a Tijera"
+let empate = "Empate!"
 
 function getComputerChoise() {
      const opcionesDeJuego= ['Piedra', 'Papel', 'Tijera']
      return opcionRandom= opcionesDeJuego[Math.floor (Math.random() * opcionesDeJuego.length)];
 }
-
-function eleccionDelJugador() {
-  return prompt('Piedra,papel o tijera?');
+function partida() {
+ 
+  
+  let seleccionDelJugador = prompt ('Piedra, Papel o Tijera?');
+  let seleccionDeMaquina = getComputerChoise();
+  console.log(juego(seleccionDelJugador, seleccionDeMaquina));
+  
 }
 
 
-function juego () {
+function juego(seleccionDelJugador, seleccionDeMaquina) {
 
     if (seleccionDelJugador.toLowerCase() == "tijera" && seleccionDeMaquina == "Piedra") {
-        alert ("Pierdes!, Piedra gana a Tijera");}
+      scoreMaquina ++;
+      return pierdeTijera;}
     else if (seleccionDelJugador.toLowerCase() == "piedra" && seleccionDeMaquina == "Piedra") {
-      alert ("Empate!");}    
+      empatados ++;
+      return empate;}    
     else if (seleccionDelJugador.toLowerCase() == "papel" && seleccionDeMaquina == "Piedra") {
-      alert ("Tu ganas!, Papel gana a Piedra!");}  
+      scoreJugador ++;
+      return ganaPapel;}  
     else if (seleccionDelJugador.toLowerCase() == "tijera" && seleccionDeMaquina == "Papel") {
-      alert ("Tu ganas!, Tijera gana a Papel!");}     
+      scoreJugador ++;
+      return ganaTijera;}     
     else if (seleccionDelJugador.toLowerCase() == "piedra" && seleccionDeMaquina == "Papel") {
-      alert ("Pierdes!,Papel gana a Piedra");}     
+      scoreMaquina ++;
+      return pierdePiedra;}     
     else if (seleccionDelJugador.toLowerCase() == "papel" && seleccionDeMaquina == "Papel") {
-      alert ("Empate!");} 
+      empatados++;
+      return empate;} 
     else if (seleccionDelJugador.toLowerCase() == "tijera" && seleccionDeMaquina == "Tijera") {
-      alert ("Empate");} 
+      empatados++;
+      return empate} 
     else if (seleccionDelJugador.toLowerCase() == "piedra" && seleccionDeMaquina == "Tijera") {
-      alert ("Tu ganas!, Piedra gana a Tijeras");} 
+      scoreJugador ++;
+      return ganaPiedra;} 
     else if (seleccionDelJugador.toLowerCase() == "papel" && seleccionDeMaquina == "Tijera") {
-      alert ("Pierdes!, Tijera gana a Papel");} 
-    
+      scoreMaquina ++;
+      return pierdeTijera;} 
+    else { return "Vuelve a intentarlo"}
+   
+  }
+
+function ganador() {
+  if (scoreJugador > scoreMaquina && empatados) {
+    return "GANASTE!"
+  }
+  else if (scoreMaquina > scoreJugador && empatados) {
+    return "PERDISTE!"
+  }
+  else if (empatados > scoreJugador && scoreMaquina) {
+    return "EMPATADOS!"
+  }
+  
 }
   
-   
-
-
-
-const seleccionDelJugador = eleccionDelJugador();
-const seleccionDeMaquina = getComputerChoise();
-console.log(juego(seleccionDelJugador, seleccionDeMaquina));
+partida()
+partida()
+partida()
+partida()
+partida()
+console.log("Jugador" + " " +scoreJugador);
+console.log("Maquina"+" " +scoreMaquina);
+console.log("Empates" + " " +empatados)
+console.log(ganador())
+ 

@@ -14,14 +14,36 @@ function getComputerChoise() {
      const opcionesDeJuego= ['Piedra', 'Papel', 'Tijera']
      return opcionRandom= opcionesDeJuego[Math.floor (Math.random() * opcionesDeJuego.length)];
 }
-function partida() {
- 
+function partida(seleccionDelJugador) {
+
   
-  let seleccionDelJugador = prompt ('Piedra, Papel o Tijera?');
+  
   let seleccionDeMaquina = getComputerChoise();
   console.log(juego(seleccionDelJugador, seleccionDeMaquina));
   
 }
+
+
+const btnPiedra = document.querySelector('#Piedra');
+btnPiedra.addEventListener('click', () => {
+  partida("piedra")
+ 
+});
+
+
+const btnPapel = document.querySelector('#Papel');
+btnPapel.addEventListener('click',  () => {
+  partida("papel")
+ 
+});
+
+
+const btnTijera = document.querySelector('#Tijera');
+btnTijera.addEventListener('click', () => {
+  partida("tijera")
+
+});
+
 
 
 function juego(seleccionDelJugador, seleccionDeMaquina) {
@@ -70,11 +92,8 @@ function ganador() {
   
 }
   
-partida()
-partida()
-partida()
-partida()
-partida()
+
+
 console.log("Jugador" + " " +scoreJugador);
 console.log("Maquina"+" " +scoreMaquina);
 console.log("Empates" + " " +empatados)

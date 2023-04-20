@@ -2,13 +2,7 @@ const opcionesDeJuego= ['Piedra', 'Papel', 'Tijera']
 let scoreJugador = 0;
 let scoreMaquina = 0;
 let empatados= 0 ;
-let ganaPiedra = "Ganaste!, Piedra gana a Tijera"
-let ganaTijera = "Ganaste!, Tijera gana a Papel"
-let ganaPapel  = "Ganaste!, Papel gana a Piedra"
-let pierdePiedra = "Perdiste!, Papel gana a Tijera"
-let pierdePapel = "Perdiste!, Tijera gana a Piedra"
-let pierdeTijera = "Perdiste!, Piedra gana a Tijera"
-let empate = "Empate!"
+
 
 function getComputerChoise() {
      const opcionesDeJuego= ['Piedra', 'Papel', 'Tijera']
@@ -16,86 +10,104 @@ function getComputerChoise() {
 }
 function partida(seleccionDelJugador) {
 
-  
-  
   let seleccionDeMaquina = getComputerChoise();
   console.log(juego(seleccionDelJugador, seleccionDeMaquina));
   
 }
 
-
 const btnPiedra = document.querySelector('#Piedra');
 btnPiedra.addEventListener('click', () => {
   partida("piedra")
- 
-});
-
+  scoreGeneral(scoreJugador, scoreMaquina)
+  gana(scoreJugador, scoreMaquina)
+ });
 
 const btnPapel = document.querySelector('#Papel');
 btnPapel.addEventListener('click',  () => {
   partida("papel")
- 
-});
-
+  scoreGeneral(scoreJugador, scoreMaquina)
+  gana(scoreJugador, scoreMaquina)
+ });
 
 const btnTijera = document.querySelector('#Tijera');
 btnTijera.addEventListener('click', () => {
   partida("tijera")
-
+  scoreGeneral(scoreJugador, scoreMaquina)
+  gana(scoreJugador, scoreMaquina)
 });
 
-
+const resultadosDiv = document.querySelector ('.resultados');
 
 function juego(seleccionDelJugador, seleccionDeMaquina) {
-
+  
     if (seleccionDelJugador.toLowerCase() == "tijera" && seleccionDeMaquina == "Piedra") {
       scoreMaquina ++;
-      return pierdeTijera;}
+      const p = document.createElement('p');
+      p.innerText = "Pierdes! Piedra vence a Tijera!";
+      resultadosDiv.appendChild(p);
+    }
     else if (seleccionDelJugador.toLowerCase() == "piedra" && seleccionDeMaquina == "Piedra") {
       empatados ++;
-      return empate;}    
+      const p = document.createElement('p');
+      p.innerText = "Empate!";
+      resultadosDiv.appendChild(p);}    
     else if (seleccionDelJugador.toLowerCase() == "papel" && seleccionDeMaquina == "Piedra") {
       scoreJugador ++;
-      return ganaPapel;}  
+      const p = document.createElement('p');
+      p.innerText = "Gana Jugador! Papel vence a Piedra!";
+      resultadosDiv.appendChild(p);}  
     else if (seleccionDelJugador.toLowerCase() == "tijera" && seleccionDeMaquina == "Papel") {
       scoreJugador ++;
-      return ganaTijera;}     
+      const p = document.createElement('p');
+      p.innerText = "Gana Jugador, Tijera vence a Papel!";
+      resultadosDiv.appendChild(p);}     
     else if (seleccionDelJugador.toLowerCase() == "piedra" && seleccionDeMaquina == "Papel") {
       scoreMaquina ++;
-      return pierdePiedra;}     
+      const p = document.createElement('p');
+      p.innerText = "Pierdes! Papel vence a Piedra";
+      resultadosDiv.appendChild(p);}     
     else if (seleccionDelJugador.toLowerCase() == "papel" && seleccionDeMaquina == "Papel") {
       empatados++;
-      return empate;} 
+      const p = document.createElement('p');
+      p.innerText = "Empate!";
+      resultadosDiv.appendChild(p);} 
     else if (seleccionDelJugador.toLowerCase() == "tijera" && seleccionDeMaquina == "Tijera") {
       empatados++;
-      return empate} 
+      const p = document.createElement('p');
+      p.innerText = "Empate!";
+      resultadosDiv.appendChild(p);} 
     else if (seleccionDelJugador.toLowerCase() == "piedra" && seleccionDeMaquina == "Tijera") {
       scoreJugador ++;
-      return ganaPiedra;} 
+      const p = document.createElement('p');
+      p.innerText = "Gana Jugador! Piedra vence a Tijera";
+      resultadosDiv.appendChild(p);} 
     else if (seleccionDelJugador.toLowerCase() == "papel" && seleccionDeMaquina == "Tijera") {
       scoreMaquina ++;
-      return pierdeTijera;} 
-    else { return "Vuelve a intentarlo"}
-   
-  }
+      const p = document.createElement('p');
+      p.innerText = "Pierdes! Tijera vence a Papel";
+      resultadosDiv.appendChild(p);} 
+    }
+const gana = function (scoreJugador, scoreMaquina){
+    if (scoreJugador === 5 || scoreMaquina === 5) {
+          if(scoreJugador > scoreMaquina) {
+              const h2 = document.createElement('h2');
+              h2.classList.add("ganaJugador");
+              h2.innerText = 'GANASTE';
+              ganador.appendChild(h2); 
+    
+          }else if (scoreMaquina > scoreJugador) {
+              const h2 = document.createElement('h2');
+              h2.classList.add("ganaMaquina");
+              h2.innerText = 'PERDISTE!';
+              ganador.appendChild(h2); 
+           }}}
+const puntajeJugador = document.querySelector ('#puntajeJugador'); 
+const puntajeMaquina = document.querySelector ('#puntajeMaquina'); 
 
-function ganador() {
-  if (scoreJugador > scoreMaquina && empatados) {
-    return "GANASTE!"
-  }
-  else if (scoreMaquina > scoreJugador && empatados) {
-    return "PERDISTE!"
-  }
-  else if (empatados > scoreJugador && scoreMaquina) {
-    return "EMPATADOS!"
-  }
+function scoreGeneral () {
+  const parra = document.getElementById ("puntajeJugador");
+  const parra2 = document.getElementById ("puntajeMaquina");
   
+  parra.textContent = `Jugador: ${scoreJugador}`;
+  parra2.textContent = `Computadora: ${scoreMaquina}`;
 }
-  
-
-
-console.log("Jugador" + " " +scoreJugador);
-console.log("Maquina"+" " +scoreMaquina);
-console.log("Empates" + " " +empatados)
-console.log(ganador())
- 
